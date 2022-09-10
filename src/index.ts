@@ -11,10 +11,6 @@
 // These initial Types are based on bindings that don't exist in the project yet,
 // you can follow the links to learn how to implement them.
 
-declare global {
-  const CART: KVNamespace;
-}
-
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace
@@ -24,7 +20,7 @@ export interface Env {
 	//
 	// Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
 	// MY_BUCKET: R2Bucket
-  env: string
+  CART: KVNamespace;
 }
 export interface ExecutionContext {
 	parames: string[]
@@ -35,11 +31,11 @@ export default {
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
-    const result = await setProductCart();
+    const result = await setProductCart(env.CART);
 		return new Response(`Hello World from ${request.method}!`);
 	},
 };
 
-const setProductCart = async () => {
+const setProductCart = async (CART: KVNamespace) => {
   return await CART.put("hogehoge", "fugafufa");
 }
