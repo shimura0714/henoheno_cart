@@ -11,6 +11,10 @@
 // These initial Types are based on bindings that don't exist in the project yet,
 // you can follow the links to learn how to implement them.
 
+declare global {
+  const CART: KVNamespace;
+}
+
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace
@@ -20,14 +24,22 @@ export interface Env {
 	//
 	// Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
 	// MY_BUCKET: R2Bucket
+  env: string
 }
-
-export const worker = {
+export interface ExecutionContext {
+	parames: string[]
+}
+export default {
 	async fetch(
 		request: Request,
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
+    const result = await setProductCart();
 		return new Response(`Hello World from ${request.method}!`);
 	},
 };
+
+const setProductCart = async () => {
+  return await CART.put("hogehoge", "fugafufa");
+}
