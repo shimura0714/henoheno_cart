@@ -14,4 +14,7 @@ kv_namespaces = [
 [env.dev.var]
 
 [env.production]
+kv_namespaces = [
+  { binding = "CART", id = "30e6876caf354a0b8fbde0b0f1ca3dfc" }
+]
 [env.production.var]
