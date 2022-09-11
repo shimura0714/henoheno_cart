@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid"
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
  *
@@ -31,11 +32,34 @@ export default {
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
-    const result = await setProductCart(env.CART);
+    const formData = await request.formData();
+    const entries = formData.entries();
+    const cookie = await getCookie(request.headers);
+    for(const entry of entries) {
+      if (typeof(entry[1]) === "string") {
+        await setProductCart(env.CART, { key: entry[0], value: entry[1] });
+        const result = await getProductCart(env.CART, entry[0]);
+        console.log(result);
+      }
+    }
+    for(const entry of entries) {
+      const result = await getProductCart(env.CART, entry[0]);
+    }
 		return new Response(`Hello World from ${request.method}!`);
 	},
 };
 
-const setProductCart = async (CART: KVNamespace) => {
-  return await CART.put("hogehoge", "fugafufa");
+const setProductCart = async (CART: KVNamespace, params: { key: string, value: string }) => {
+  return await CART.put(params.key, params.value);
+}
+
+const getProductCart = async (CART: KVNamespace, key: string) => {
+  return await CART.get(key);
+}
+
+const getCookie = async (headers: Headers) => {
+  if(!headers.has("uid")){
+    return uuidv4();
+  } 
+  return headers.get("uid");  
 }
