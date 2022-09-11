@@ -1,5 +1,5 @@
 main = "./src/index.ts"
-name = "worker-typescript-template"
+name = "cart"
 compatibility_date = "2022-07-26"
 
 [build.upload]
