@@ -1,5 +1,5 @@
 main = "./src/index.ts"
-name = "worker-typescript-template"
+name = "cart"
 compatibility_date = "2022-07-26"
 
 [env.dev]
@@ -11,4 +11,7 @@ kv_namespaces = [
 [env.dev.var]
 
 [env.production]
+kv_namespaces = [
+  { binding = "CART", id = "30e6876caf354a0b8fbde0b0f1ca3dfc" }
+]
 [env.production.var]
