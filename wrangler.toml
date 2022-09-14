@@ -2,11 +2,8 @@ main = "./src/index.ts"
 name = "worker-typescript-template"
 compatibility_date = "2022-07-26"
 
-[build.upload]
-format = "modules"
-dist = "src"
-
 [env.dev]
+worker_dev = true
 routes = [{ pattern = "localhost:8787/*", zone_id= ""}, { pattern = "localhost:8787/", zone_id= ""}]
 kv_namespaces = [
   { binding = "CART", id = "974de73114ca4b07a89195841bbb62de", preview_id = "9c0c5f2e584344a89b2fe32eaa3667bd" }
