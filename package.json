@@ -9,7 +9,7 @@
 		"format": "prettier --write  '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
 		"lint": "eslint --max-warnings=0 src && prettier --check '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "worker:local": "npx wrangler dev --local"
+    "worker:local": "npx wrangler dev --env dev --local"
 	},
 	"author": "author",
 	"license": "MIT OR Apache-2.0",

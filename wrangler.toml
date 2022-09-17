@@ -15,3 +15,9 @@ kv_namespaces = [
   { binding = "CART", id = "30e6876caf354a0b8fbde0b0f1ca3dfc" }
 ]
 [env.production.var]
+
+[[unsafe.bindings]]
+name = "CART"
+type = "service"
+service = "production-henoheno"
+environment = "production"
